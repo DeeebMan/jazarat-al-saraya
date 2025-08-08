@@ -17,7 +17,7 @@
                     <img src="images/logo.png" alt="جزارة السرايا" class="logo-image">
                     <span>جزارة السرايا</span>
                 </div>
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
                     <a href="#home">الرئيسية</a>
                     <a href="#menu">المنتجات</a>
                     <a href="#contact">اتصل بنا</a>
@@ -29,9 +29,16 @@
                         <i class="fas fa-sync-alt"></i>
                     </button>
                 </div>
-                <div class="cart-icon" onclick="toggleCart()">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count" id="cartCount">0</span>
+                <div class="mobile-controls">
+                    <div class="cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <div class="hamburger" onclick="toggleMobileMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
             </div>
         </nav>

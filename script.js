@@ -500,3 +500,27 @@ document.addEventListener('keydown', function(event) {
         document.getElementById('cartSidebar').classList.remove('active');
     }
 });
+
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+    const navLinks = document.getElementById('navLinks');
+    const hamburger = document.querySelector('.hamburger');
+    
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+}
+
+// إغلاق القائمة المحمولة عند النقر على أحد الروابط
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const mobileNav = document.getElementById('navLinks');
+            const hamburger = document.querySelector('.hamburger');
+            
+            mobileNav.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+});
