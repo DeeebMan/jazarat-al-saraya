@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - جزارة السرايا</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="جزارة السرايا" class="logo-image">
+                <h1>لوحة التحكم - جزارة السرايا</h1>
+            </div>
+                    <nav class="admin-nav">
+            <a href="index.html" class="nav-link" onclick="updateMainPage()">
+                <i class="fas fa-home"></i>
+                العودة للموقع
+            </a>
+            <button onclick="logout()" class="logout-btn" title="تسجيل الخروج">
+                <i class="fas fa-sign-out-alt"></i>
+                تسجيل الخروج
+            </button>
+        </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="container">
+            <!-- Dashboard Stats -->
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>إجمالي المنتجات</h3>
+                    <p id="totalProducts">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tags"></i>
+                    <h3>الفئات</h3>
+                    <p id="totalCategories">0</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-image"></i>
+                    <h3>الصور المرفوعة</h3>
+                    <p id="totalImages">0</p>
+                </div>
+            </div>
+
+            <!-- Admin Tabs -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" onclick="showTab('products')">
+                    <i class="fas fa-box"></i>
+                    إدارة المنتجات
+                </button>
+                <button class="tab-btn" onclick="showTab('categories')">
+                    <i class="fas fa-tags"></i>
+                    إدارة الفئات
+                </button>
+                <button class="tab-btn" onclick="showTab('images')">
+                    <i class="fas fa-images"></i>
+                    إدارة الصور
+                </button>
+                <button class="tab-btn" onclick="showTab('settings')">
+                    <i class="fas fa-cog"></i>
+                    الإعدادات
+                </button>
+            </div>
+
+            <!-- Products Tab -->
+            <div id="products" class="tab-content active">
+                <div class="tab-header">
+                    <h2>إدارة المنتجات</h2>
+                    <button class="btn btn-primary" onclick="showAddProductModal()">
+                        <i class="fas fa-plus"></i>
+                        إضافة منتج جديد
+                    </button>
+                </div>
+                
+                <div class="filters">
+                    <select id="categoryFilter" onchange="filterProducts()">
+                        <option value="">جميع الفئات</option>
+                        <option value="لحوم فاخرة">لحوم فاخرة</option>
+                        <option value="طواجن">طواجن</option>
+                        <option value="حواوشي">حواوشي</option>
+                    </select>
+                    <input type="text" id="searchProducts" placeholder="البحث في المنتجات..." onkeyup="searchProducts()">
+                </div>
+
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Categories Tab -->
+            <div id="categories" class="tab-content">
+                <div class="tab-header">
+                    <h2>إدارة الفئات</h2>
+                    <button class="btn btn-primary" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus"></i>
+                        إضافة فئة جديدة
+                    </button>
+                </div>
+                
+                <div class="categories-list" id="categoriesList">
+                    <!-- Categories will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Images Tab -->
+            <div id="images" class="tab-content">
+                <div class="tab-header">
+                    <h2>إدارة الصور</h2>
+                    <button class="btn btn-primary" onclick="showImageUploadModal()">
+                        <i class="fas fa-upload"></i>
+                        رفع صورة جديدة
+                    </button>
+                </div>
+                
+                <div class="images-grid" id="imagesGrid">
+                    <!-- Images will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <div class="tab-header">
+                    <h2>الإعدادات</h2>
+                </div>
+                
+                <div class="settings-form">
+                    <div class="setting-group">
+                        <h3>إعدادات الموقع</h3>
+                        <div class="form-group">
+                            <label>اسم الموقع</label>
+                            <input type="text" id="siteName" value="جزارة السرايا">
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الهاتف</label>
+                            <input type="tel" id="phoneNumber" value="201124283331">
+                        </div>
+                        <div class="form-group">
+                            <label>رقم الواتساب</label>
+                            <input type="tel" id="whatsappNumber" value="201124283331">
+                        </div>
+                        <div class="form-group">
+                            <label>العنوان</label>
+                            <textarea id="address">ولكلي- شارع محمد فريد وينجت – بعد نادى القضاة أمام كارفور – اسكندرية</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h3>إعدادات العملة</h3>
+                        <div class="form-group">
+                            <label>العملة</label>
+                            <select id="currency">
+                                <option value="جنيه">جنيه</option>
+                                <option value="ريال">ريال</option>
+                                <option value="دولار">دولار</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <h3>نسخ احتياطي واستيراد</h3>
+                        <div class="form-group">
+                            <button class="btn btn-success" onclick="exportData()">
+                                <i class="fas fa-download"></i>
+                                تصدير البيانات
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display: none;">
+                            <button class="btn btn-primary" onclick="document.getElementById('importFile').click()">
+                                <i class="fas fa-upload"></i>
+                                استيراد البيانات
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-success" onclick="saveSettings()">
+                        <i class="fas fa-save"></i>
+                        حفظ الإعدادات
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة منتج جديد</h3>
+                <button class="close-btn" onclick="closeModal('addProductModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addProductForm" onsubmit="addProduct(event)">
+                <div class="form-group">
+                    <label>اسم المنتج</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="productDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>السعر</label>
+                    <input type="number" id="productPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>الفئة</label>
+                    <select id="productCategory" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="لحوم فاخرة">لحوم فاخرة</option>
+                        <option value="طواجن">طواجن</option>
+                        <option value="حواوشي">حواوشي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>صورة المنتج</label>
+                    <select id="productImage" required></select>
+                    <small>اختر صورة من الصور المرفوعة. إذا لم تجد الصورة المطلوبة، قم برفعها أولاً من تبويب الصور.</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addProduct()">إضافة المنتج</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تعديل المنتج</h3>
+                <button class="close-btn" onclick="closeModal('editProductModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editProductForm">
+                <input type="hidden" id="editProductId">
+                <div class="form-group">
+                    <label>اسم المنتج</label>
+                    <input type="text" id="editProductName" required>
+                </div>
+                <div class="form-group">
+                    <label>الوصف</label>
+                    <textarea id="editProductDescription"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>السعر</label>
+                    <input type="number" id="editProductPrice" required>
+                </div>
+                <div class="form-group">
+                    <label>الفئة</label>
+                    <select id="editProductCategory" required>
+                        <option value="">اختر الفئة</option>
+                        <option value="لحوم فاخرة">لحوم فاخرة</option>
+                        <option value="طواجن">طواجن</option>
+                        <option value="حواوشي">حواوشي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>صورة المنتج</label>
+                    <select id="editProductImage" required></select>
+                    <small>اختر صورة من الصور المرفوعة. إذا لم تجد الصورة المطلوبة، قم برفعها أولاً من تبويب الصور.</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="updateProduct()">حفظ التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Image Upload Modal -->
+    <div id="imageUploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>رفع صورة جديدة</h3>
+                <button class="close-btn" onclick="closeModal('imageUploadModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="imageUploadForm">
+                <div class="form-group">
+                    <label>اختر الصورة</label>
+                    <input type="file" id="imageFile" accept="image/*" required multiple>
+                </div>
+                <div class="form-group">
+                    <label>الفئة (اختياري)</label>
+                    <select id="imageCategory">
+                        <option value="">بدون فئة</option>
+                        <option value="لحوم فاخرة">لحوم فاخرة</option>
+                        <option value="طواجن">طواجن</option>
+                        <option value="حواوشي">حواوشي</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="uploadImage()">رفع الصورة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Category Modal -->
+    <div id="addCategoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>إضافة فئة جديدة</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addCategoryForm">
+                <div class="form-group">
+                    <label>اسم الفئة</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label>وصف الفئة</label>
+                    <textarea id="categoryDescription"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="addCategory()">إضافة الفئة</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Category Modal -->
+    <div id="editCategoryModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>تعديل الفئة</h3>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editCategoryForm">
+                <input type="hidden" id="editCategoryId">
+                <div class="form-group">
+                    <label>اسم الفئة</label>
+                    <input type="text" id="editCategoryName" required>
+                </div>
+                <div class="form-group">
+                    <label>وصف الفئة</label>
+                    <textarea id="editCategoryDescription"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal()">إلغاء</button>
+                    <button type="button" class="btn btn-primary" onclick="updateCategory()">حفظ التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

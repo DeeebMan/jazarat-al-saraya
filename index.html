@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزارة السرايا - أفضل اللحوم الطازجة</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="جزارة السرايا" class="logo-image">
+                    <span>جزارة السرايا</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#home">الرئيسية</a>
+                    <a href="#menu">المنتجات</a>
+                    <a href="#contact">اتصل بنا</a>
+                    <a href="login.html" class="admin-link">
+                        <i class="fas fa-cog"></i>
+                        الإدارة
+                    </a>
+                    <button onclick="refreshMainPage()" class="refresh-btn" title="تحديث المنتجات">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="cart-icon" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>أفضل اللحوم الطازجة</h1>
+                <p>نقدم لكم أجود أنواع اللحوم والطواجن والحواوشي</p>
+                <a href="#menu" class="cta-button">اطلب الآن</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2>قائمة المنتجات</h2>
+            
+            <!-- اللحوم الفاخرة والمخصوص -->
+            <div class="menu-section">
+                <h3>اللحوم الفاخرة والمخصوص</h3>
+                <div class="menu-grid" id="meatGrid">
+                    <!-- سيتم تحميل المنتجات هنا -->
+                </div>
+            </div>
+
+            <!-- الطواجن -->
+            <div class="menu-section">
+                <h3>الطواجن</h3>
+                <div class="menu-grid" id="tajinGrid">
+                    <!-- سيتم تحميل المنتجات هنا -->
+                </div>
+            </div>
+
+            <!-- الحواوشي -->
+            <div class="menu-section">
+                <h3>الحواوشي</h3>
+                <div class="menu-grid" id="hawawshiGrid">
+                    <!-- سيتم تحميل المنتجات هنا -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>سلة الطلبات</h3>
+            <button class="close-cart" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- سيتم إضافة العناصر هنا -->
+        </div>
+        
+        <div class="cart-footer">
+            <form id="checkoutForm" onsubmit="return false;">
+                <div class="form-group">
+                    <input type="text" id="customerName" placeholder="الاسم" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="customerAddress" placeholder="العنوان" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="customerPhone" placeholder="رقم التليفون" required>
+                </div>
+            </form>
+            
+            <div class="cart-total">
+                <span>المجموع:</span>
+                <span id="cartTotal">0 جنيه</span>
+            </div>
+            
+            <div class="cart-actions">
+                <button class="btn btn-danger" onclick="clearCart()">
+                    <i class="fas fa-trash"></i>
+                    تفريغ السلة
+                </button>
+                <button class="btn btn-primary" onclick="checkout()">
+                    <i class="fab fa-whatsapp"></i>
+                    إتمام الطلب عبر واتساب
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>اتصل بنا</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h3>العنوان</h3>
+                        <p>ولكلي- شارع محمد فريد وينجت – بعد نادى القضاة أمام كارفور – اسكندرية</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h3>الهاتف</h3>
+                        <p>201124283331</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <div>
+                        <h3>واتساب</h3>
+                        <p>اطلب عبر واتساب</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 جزارة السرايا. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
